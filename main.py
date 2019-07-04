@@ -16,18 +16,6 @@ from threading import Thread
 from followLine import FollowLine
 from deflectObstacle import DeflectObstacle
 
-# Engine declaration
-motorDirectionLeft = Motor(Port.A)
-motorRideUp = Motor(Port.B)
-motorGoDown = Motor(Port.C)
-motorDirectionRight = Motor(Port.D)
-
-# Sensor declaration
-sensorColorLeft = ColorSensor(Port.S1)
-sensorUltrassonicLeft = UltrasonicSensor(Port.S2)
-sensorUltrassonicRight = UltrasonicSensor(Port.S3)
-sensorColorRight = ColorSensor(Port.S4)
-
 # Follow line
 follow_line = FollowLine(Motor(Port.A),Motor(Port.B),ColorSensor(Port.S1),ColorSensor(Port.S4),UltrasonicSensor(Port.S2))
 follow_line.follow()
