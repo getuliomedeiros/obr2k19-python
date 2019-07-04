@@ -14,22 +14,22 @@ from pybricks.robotics import DriveBase
 from threading import Thread
 
 # Engine declaration
-motorDirectionLeft = motorDirectionLeft.Motor(Port.A)
-motorRideUp = motorRideUp.Motor(Port.B)
-motorGoDown = motorGoDown.Motor(Port.C)
-motorDirectionRight = motorDirectionLeft.Motor(Port.D)
+motorDirectionLeft = Motor(Port.A)
+motorRideUp = Motor(Port.B)
+motorGoDown = Motor(Port.C)
+motorDirectionRight = Motor(Port.D)
 
 # Sensor declaration
-sensorColorLeft = sensorColorLeft.ColorSensor(Port.S1).mode='COL-REFLECT'
-sensorUltrassonicLeft = UltrasonicSensor(Port.S2).mode = 'US-DIST-CM'
-sensorUltrassonicRight = UltrasonicSensor(Port.S3).mode = 'US-DIST-CM'
-sensorColorRight = sensorColorRight.ColorSensor(Port.S4).mode='COL-REFLECT'
+sensorColorLeft = ColorSensor(Port.S1)
+sensorUltrassonicLeft = UltrasonicSensor(Port.S2)
+sensorUltrassonicRight = UltrasonicSensor(Port.S3)
+sensorColorRight = ColorSensor(Port.S4)
 
 # Code body
-followTrack = Thread(target=followTrack)
-followTrack.start()
-deflectObstacle = Thread(target=deflectObstacle)
-deflectObstacle.start()
+#followTrack = Thread(target=followTrack)
+#followTrack.start()
+#deflectObstacle = Thread(target=deflectObstacle)
+#deflectObstacle.start()
 
 # Function follow track
 def followTrack(sc1, sc2, m1, m2):
