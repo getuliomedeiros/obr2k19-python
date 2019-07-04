@@ -5,6 +5,6 @@ First project python for OBR 2019 with Visual Studio Code for programming LEGO®
 **Develop an autonomous rescue robot**
 
 ### Functionality
-* Follow track
+* Follow line
 * Deviation from obstacles
 * Rescue

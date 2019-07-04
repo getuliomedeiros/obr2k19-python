@@ -13,6 +13,9 @@ from pybricks.tools import print, wait, StopWatch
 from pybricks.robotics import DriveBase
 from threading import Thread
 
+from followLine import FollowLine
+from deflectObstacle import DeflectObstacle
+
 # Engine declaration
 motorDirectionLeft = Motor(Port.A)
 motorRideUp = Motor(Port.B)
@@ -25,47 +28,10 @@ sensorUltrassonicLeft = UltrasonicSensor(Port.S2)
 sensorUltrassonicRight = UltrasonicSensor(Port.S3)
 sensorColorRight = ColorSensor(Port.S4)
 
-# Code body
-#followTrack = Thread(target=followTrack)
-#followTrack.start()
-#deflectObstacle = Thread(target=deflectObstacle)
-#deflectObstacle.start()
+# Follow line
+follow_line = FollowLine(Motor(Port.A),Motor(Port.B),ColorSensor(Port.S1),ColorSensor(Port.S4),UltrasonicSensor(Port.S2))
+follow_line.follow()
 
-# Function follow track
-def followTrack(sc1, sc2, m1, m2):
-    motorMovementRight = DriveBase(m1,m2,20,-32)
-    motorMovementLeft = DriveBase(m1,m2,-32,20)
-    motorMovementForward = DriveBase(m1,m2,30,30)
-    motorMovementForwardReduced = DriveBase(m1,m2,15,15)
-    if (sc1.value() > 30):
-        if(sc2.value() > 30):
-            motorMovementForward.drive()
-        else:
-            motorMovementRight.drive()
-    else:
-        if(sc2.value() > 30):
-            motorMovementLeft.drive()
-        else:
-            motorMovementForwardReduced.drive()
-
-# Function deflect obstacle
-def deflectObstacle(su1, m1, m2,sc1, sc2):
-    motorMovementRight = DriveBase(m1,m2,20,-32)
-    motorMovementLeft = DriveBase(m1,m2,-32,20)
-    motorMovementForward = DriveBase(m1,m2,30,30)
-    if(su1.distance() < 10):
-        motorDirectionRight.drive_time(50,0,2000)
-        motorMovementForward.drive_time(50,0,3000)
-        motorDirectionRight.drive_time(50,0,2000)
-        motorMovementForward.drive_time(50,0,5000)
-        motorDirectionRight.drive_time(50,0,1500)
-        while(sc2.value() > 30):
-            motorMovementForward.drive()
-        while(sc1.value() > 30):
-            motorDirectionRight.drive()
-
-# Function rescue
-#def rescue():
-
-# Function detects gray
-#def detectsGray():
+# Deflect obstacle
+deflect_obstacle = DeflectObstacle(Motor(Port.A),Motor(Port.B),ColorSensor(Port.S1),ColorSensor(Port.S4))
+deflect_obstacle.deflect()
