@@ -58,6 +58,7 @@ def followTrack():
         brick.display.text("Black", (60, 50))
         motorMovementForward.drive(20,0)
         brick.display.clear()
+        
 # Function deflect obstacle
 #def deflectObstacle():
 
