@@ -6,5 +6,6 @@ First project python for OBR 2019 with Visual Studio Code for programming LEGO®
 
 ### Functionality
 * Follow line
+* Overcome obstacles
 * Deviation from obstacles
 * Rescue
