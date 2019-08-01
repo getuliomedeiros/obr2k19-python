@@ -1,6 +1,5 @@
-// Place your settings in this file to overwrite default and user settings.
 {
-	"files.eol": "\n",
-	"debug.openDebug": "neverOpen",
-	"python.linting.enabled": false 
+    "files.eol": "\n",
+    "ev3devBrowser.download.exclude": "{**/.*,LICENSE,README.md}",
+    "terminal.integrated.shell.windows": "cmd.exe"
 }
