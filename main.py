@@ -16,13 +16,13 @@ from threading import Thread
 #brick.sound.beep()
 brick.display.clear()
 
-# Engine declaration --------------------------------------------------------------------
+# Engine declaration ----------------------------------------------------------------------
 motorDirectionLeft = Motor(Port.A)
 #motorRideUp = Motor(Port.B)
 #motorGoDown = Motor(Port.C)
 motorDirectionRight = Motor(Port.D)
 
-# Sensor declaration --------------------------------------------------------------------
+# Sensor declaration ----------------------------------------------------------------------
 sensorColorLeft = ColorSensor(Port.S1)
 sensorUltrassonicFront = UltrasonicSensor(Port.S2)
 #sensorUltrassonicSide = UltrasonicSensor(Port.S3)
@@ -216,8 +216,32 @@ def followTrack():
         
 # Function deflect obstacle ---------------------------------------------------------------
 def deflectObstacle():
-    motorMovementForward.drive(-100,0)
-    wait(512)
+    motorMovementForward.drive(0,0) # stop
+    wait(100) # delay stop
+    motorMovementForward.drive(-25,0) # back
+    wait(128) # delay back
+    motorMovementForward.drive(0,0) # stop
+    wait(100) # delay stop
+    motorMovementTurn.drive(0,-256) # side right 
+    wait(1024) # delay side rigth
+    motorMovementForward.drive(0,0) # stop
+    wait(100) # delay stop
+    motorMovementForward.drive(50,0) # front
+    wait(4092) # delay front
+    motorMovementForward.drive(0,0)
+    wait(100) # delay stop
+    motorMovementTurn.drive(0,256) # side left
+    wait(1024) # delay side left
+    motorMovementForward.drive(50,0) # front
+    wait(5000) # delay front
+    motorMovementTurn.drive(0,256) # side left
+    wait(512) # delay side left
+    motorMovementForward.drive(25,0) # front search line
+    while sensorColorRight.reflection() > 30:
+        wait(10)
+    motorMovementTurn.drive(0,-256) # side right
+    while sensorColorLeft.reflection() > 30:
+        wait(10)
 
 # Function rescue -------------------------------------------------------------------------
 #def rescue():
@@ -228,7 +252,7 @@ def deflectObstacle():
 # Function main ---------------------------------------------------------------------------
 def main():
     while True:
-        if sensorUltrassonicFront.distance() < 100:
+        if sensorUltrassonicFront.distance() < 70:
             deflectObstacle()
         else:
             followTrack()
