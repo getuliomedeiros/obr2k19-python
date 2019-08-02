@@ -23,33 +23,33 @@ motorDirectionLeft = Motor(Port.A)
 motorDirectionRight = Motor(Port.D)
 
 # Sensor declaration ----------------------------------------------------------------------
-sensorColorLeft = ColorSensor(Port.S1)
+sensorColorLeft = ColorSensor(Port.S1) 
 sensorUltrassonicFront = UltrasonicSensor(Port.S2)
 #sensorUltrassonicSide = UltrasonicSensor(Port.S3)
 sensorColorRight = ColorSensor(Port.S4)
 
 #Movements --------------------------------------------------------------------------------
-motorMovementForward = DriveBase(motorDirectionLeft,motorDirectionRight,30,30)
-motorMovementTurn = DriveBase(motorDirectionLeft,motorDirectionRight,20,-32)
+motorMovementForward = DriveBase(motorDirectionLeft,motorDirectionRight,30,30) # moviment front and back
+motorMovementTurn = DriveBase(motorDirectionLeft,motorDirectionRight,20,-32) # moviment side left and right
 
 # Function detect green -------------------------------------------------------------------
 def detectGreenRight():
 
-    contGreen = 0
-    motorMovementTurn.drive(-20,0)
-    wait(100)
-    motorMovementForward.drive(0,0)
-    wait(10)
+    contGreen = 0 # counter variable from green
+    motorMovementTurn.drive(-20,0) # turn for rigth for confirmed that no is black/white
+    wait(100) # delay
+    motorMovementForward.drive(0,0) # stop for read of sensor
+    wait(10) # delay
 
     print("R1")
-    for i in range(500):
+    for i in range(500): # first reading loop for confirmed the green 
         if sensorColorRight.color() == 2:
             contGreen += 1
         else:
             contGreen += 0
 
     print("R2")
-    for i in range(500):
+    for i in range(500): # second reading loop for confirmed the green
         if sensorColorRight.color() == 2:
             contGreen += 1
         else:
@@ -70,27 +70,27 @@ def detectGreenRight():
 
 def detectGreenLeft():
 
-    contGreen = 0
-    motorMovementTurn.drive(20,0)
-    wait(100)
-    motorMovementForward.drive(0,0)
-    wait(10)
+    contGreen = 0 # counter variable from green
+    motorMovementTurn.drive(20,0) # turn for left for confirmed that no is black/white
+    wait(100) # delay
+    motorMovementForward.drive(0,0) # stop for read of sensor
+    wait(10) # delay
 
     print("L1")
-    for i in range(500):
+    for i in range(500): # first reading loop for confirmed the green 
         if sensorColorLeft.color() == 2:
             contGreen += 1
         else:
             contGreen += 0
 
     print("L2")
-    for i in range(500):
+    for i in range(500): # second reading loop for confirmed the green
         if sensorColorLeft.color() == 2:
             contGreen += 1
         else:
             contGreen += 0
 
-    if contGreen >= 999:
+    if contGreen >= 999: # green confirmed condition
         print("Green")
         motorMovementForward.drive(100,0)
         wait(400)
@@ -105,26 +105,26 @@ def detectGreenLeft():
 
 def doubleGreen():
     contGreen = 0
-    motorMovementTurn.drive(20,0)
-    wait(100)
-    motorMovementForward.drive(0,0)
-    wait(10)
+    motorMovementForward.drive(-20,0) # back for confimed that duoble green
+    wait(100) # delay
+    motorMovementForward.drive(0,0) # stop for read of sensor
+    wait(10) # delay
 
     print("LR")
-    for i in range(500):
+    for i in range(500): # first reading loop for confirmed the green  
         if sensorColorLeft.color() == 2 and sensorColorRight.color() == 2:
             contGreen += 1
         else:
             contGreen += 0
 
     print("LR")
-    for i in range(500):
+    for i in range(500): # second reading loop for confirmed the green
         if sensorColorLeft.color() == 2 and sensorColorRight.color() == 2:
             contGreen += 1
         else:
             contGreen += 0
     
-    if contGreen >= 999:
+    if contGreen >= 999: # green confirmed condition
         print("Green")
         brick.display.text("Left Green", (60, 50))
         motorMovementForward.drive(-100,0)
@@ -141,7 +141,7 @@ def doubleGreen():
 def followTrack():
 
     if sensorColorLeft.reflection() < 30 and sensorColorRight.reflection() > 30: # side left
-        if sensorColorLeft.color() == 2: # detect green left
+        if sensorColorLeft.color() == 2: # detect green sensor left
             contGreen = 0
             motorMovementForward.drive(0,0)
             wait(1)
@@ -166,7 +166,7 @@ def followTrack():
             brick.display.clear() 
 
     elif sensorColorLeft.reflection() > 30 and sensorColorRight.reflection() < 30: # side right
-        if sensorColorRight.color() == 2: # detect green right
+        if sensorColorRight.color() == 2: # detect green sensor right
             contGreen = 0
             motorMovementForward.drive(0,0)
             wait(1)
@@ -196,17 +196,17 @@ def followTrack():
         brick.display.clear()
 
     else: # black
-        if sensorColorLeft.color() == 2 and sensorColorRight.color() == 2:
+        if sensorColorLeft.color() == 2 and sensorColorRight.color() == 2: # detect green sensor right 
             contGreen = 0
             motorMovementForward.drive(0,0)
-            for i in range(11):
+            for i in range(11): # for from detection green
                 if sensorColorLeft.color() == 2 and sensorColorRight.color() == 2:
                     contGreen += 1
                 else:
                     contGreen += 0
-            if contGreen >= 9:
+            if contGreen >= 9: # confirmation green
                 doubleGreen()
-            else:
+            else: # green not confirmed
                 motorMovementForward.drive(20,0)
 
         else:
@@ -228,7 +228,7 @@ def deflectObstacle():
     wait(100) # delay stop
     motorMovementForward.drive(50,0) # front
     wait(4092) # delay front
-    motorMovementForward.drive(0,0)
+    motorMovementForward.drive(0,0) #stop
     wait(100) # delay stop
     motorMovementTurn.drive(0,256) # side left
     wait(1024) # delay side left
@@ -237,10 +237,10 @@ def deflectObstacle():
     motorMovementTurn.drive(0,256) # side left
     wait(512) # delay side left
     motorMovementForward.drive(25,0) # front search line
-    while sensorColorRight.reflection() > 30:
+    while sensorColorRight.reflection() > 30: # search Track
         wait(10)
     motorMovementTurn.drive(0,-256) # side right
-    while sensorColorLeft.reflection() > 30:
+    while sensorColorLeft.reflection() > 30: # align
         wait(10)
 
 # Function rescue -------------------------------------------------------------------------
