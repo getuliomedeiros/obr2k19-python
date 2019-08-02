@@ -140,62 +140,62 @@ def doubleGreen():
 # Function follow track -------------------------------------------------------------------
 def followTrack():
 
-    if sensorColorLeft.reflection() < 30 and sensorColorRight.reflection() > 30:
-        if sensorColorLeft.color() == 2:
+    if sensorColorLeft.reflection() < 30 and sensorColorRight.reflection() > 30: # side left
+        if sensorColorLeft.color() == 2: # detect green left
             contGreen = 0
             motorMovementForward.drive(0,0)
             wait(1)
-            for i in range(11):
+            for i in range(11): # for from detection green
                 if sensorColorLeft.color() == 2:
                     contGreen += 1
                 else:
                     contGreen += 0
-            if contGreen >= 9:
+            if contGreen >= 9: # confirmation green
                 detectGreenLeft()
-            else:
+            else: # green not confirmed
                 motorMovementTurn.drive(0,-128)
                 while sensorColorRight.reflection() > 30:
                     wait(10)
                 brick.display.clear()
             contGreen = 0        
-        else:
+        else: # side right
             brick.display.text("Right", (60, 50))
             motorMovementTurn.drive(0,128)
             while sensorColorLeft.reflection() < 30:
                 wait(10)
             brick.display.clear() 
 
-    elif sensorColorLeft.reflection() > 30 and sensorColorRight.reflection() < 30:
-        if sensorColorRight.color() == 2:
+    elif sensorColorLeft.reflection() > 30 and sensorColorRight.reflection() < 30: # side right
+        if sensorColorRight.color() == 2: # detect green right
             contGreen = 0
             motorMovementForward.drive(0,0)
             wait(1)
-            for i in range(11):
-                if sensorColorRight.color() == 2:
+            for i in range(11): # for from detection green
+                if sensorColorRight.color() == 2: # confirmation green
                     contGreen += 1
-                else:
+                else: 
                     contGreen += 0
             if contGreen >= 9:
                 detectGreenRight()
-            else:
+            else: # green not confirmed
                 motorMovementTurn.drive(0,128)
                 while sensorColorLeft.reflection() > 30:
                     wait(10)
                 brick.display.clear() 
             contGreen = 0
-        else:
+        else: # side left
             brick.display.text("Left", (60, 50))
             motorMovementTurn.drive(0,-128)
             while sensorColorRight.reflection() < 30:
                 wait(10)
             brick.display.clear() 
 
-    elif sensorColorLeft.reflection() > 30 and sensorColorLeft.reflection() > 30:
+    elif sensorColorLeft.reflection() > 30 and sensorColorLeft.reflection() > 30: # white
         brick.display.text("White", (60, 50))
         motorMovementForward.drive(60,0)
         brick.display.clear()
 
-    else:
+    else: # black
         if sensorColorLeft.color() == 2 and sensorColorRight.color() == 2:
             contGreen = 0
             motorMovementForward.drive(0,0)
