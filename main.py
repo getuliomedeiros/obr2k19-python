@@ -204,6 +204,7 @@ def followTrack():
         
 # Function deflect obstacle ---------------------------------------------------------------
 def deflectObstacle():
+    brick.display.text("Obstacle", (60, 50))
     motorMovementForward.drive(0,0) # stop
     wait(100) # delay stop
     motorMovementForward.drive(-50,0) # back
@@ -214,17 +215,19 @@ def deflectObstacle():
     wait(1000) # delay side rigth
     motorMovementForward.drive(0,0) # stop
     wait(100) # delay stop
-    motorMovementForward.drive(50,0) # front
-    wait(4000) # delay front
+    motorMovementForward.drive(70,0) # front
+    wait(3000) # delay front
     motorMovementForward.drive(0,0)
     wait(100) # delay stop
     motorMovementTurn.drive(0,256) # side left
     wait(1000) # delay side left
-    motorMovementForward.drive(50,0) # front
-    wait(6000) # delay front
+    motorMovementForward.drive(70,0) # front
+    wait(4000) # delay front
     motorMovementTurn.drive(0,256) # side left
-    wait(500) # delay side left
-    motorMovementForward.drive(25,0) # front search line
+    wait(550) # delay side left
+    motorMovementForward.drive(50,0) # front search line
+    wait(1000)
+    motorMovementForward.drive(50,0) # front search line
     while sensorColorRight.reflection() > 30:
         wait(10)
     motorMovementTurn.drive(0,-256) # side right
@@ -240,7 +243,7 @@ def deflectObstacle():
 # Function main ---------------------------------------------------------------------------
 def main():
     while True:
-        if sensorUltrassonicFront.distance() < 70:
+        if sensorUltrassonicFront.distance() < 100:
             deflectObstacle()
         else:
             followTrack()
