@@ -130,8 +130,6 @@ def followTrack():
             for i in range(11): # for from detection green
                 if sensorColorLeft.color() == 2:
                     contGreen += 1
-                else:
-                    contGreen += 0
             if contGreen >= 9: # confirmation green
                 detectGreenLeft()
             else: # green not confirmed
@@ -160,8 +158,6 @@ def followTrack():
             for i in range(11): # for from detection green
                 if sensorColorRight.color() == 2: # confirmation green
                     contGreen += 1
-                else: 
-                    contGreen += 0
             if contGreen >= 9:
                 detectGreenRight()
             else: # green not confirmed
@@ -197,8 +193,6 @@ def followTrack():
             for i in range(11):
                 if sensorColorLeft.color() == 2 and sensorColorRight.color() == 2:
                     contGreen += 1
-                else:
-                    contGreen += 0
             if contGreen >= 9:
                 doubleGreen()
             else:
@@ -237,11 +231,11 @@ def deflectObstacle():
     while sensorColorLeft.reflection() > 30:
         wait(10)
 
+# Function rescue init --------------------------------------------------------------------
+#def rescueInit():
+
 # Function rescue -------------------------------------------------------------------------
 #def rescue():
-
-# Function detects gray -------------------------------------------------------------------
-#def detectsGray():
 
 # Function main ---------------------------------------------------------------------------
 def main():
