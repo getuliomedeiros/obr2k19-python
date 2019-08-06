@@ -41,7 +41,7 @@ def detectGreenRight():
     motorMovementForward.drive(0,0)
     wait(100)
 
-    print("R1")
+    print("Loop from confirmed Right Sensor")
     for i in range(1000):
         if sensorColorRight.color() == 2:
             contGreen += 1
@@ -70,7 +70,7 @@ def detectGreenLeft():
     motorMovementForward.drive(0,0)
     wait(100)
 
-    print("L1")
+    print("Loop from confirmed Left Sensor")
     for i in range(1000):
         if sensorColorLeft.color() == 2:
             contGreen += 1
@@ -98,7 +98,7 @@ def doubleGreen():
     motorMovementForward.drive(0,0)
     wait(100)
 
-    print("LR")
+    print("Loop from confirmed Double Sensor")
     for i in range(1000):
         if sensorColorLeft.color() == 2 and sensorColorRight.color() == 2:
             contGreen += 1
