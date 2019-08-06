@@ -42,14 +42,7 @@ def detectGreenRight():
     wait(100)
 
     print("R1")
-    for i in range(500):
-        if sensorColorRight.color() == 2:
-            contGreen += 1
-        else:
-            contGreen += 0
-
-    print("R2")
-    for i in range(500):
+    for i in range(1000):
         if sensorColorRight.color() == 2:
             contGreen += 1
         else:
@@ -80,14 +73,7 @@ def detectGreenLeft():
     wait(100)
 
     print("L1")
-    for i in range(500):
-        if sensorColorLeft.color() == 2:
-            contGreen += 1
-        else:
-            contGreen += 0
-
-    print("L2")
-    for i in range(500):
+    for i in range(1000):
         if sensorColorLeft.color() == 2:
             contGreen += 1
         else:
@@ -117,19 +103,12 @@ def doubleGreen():
     wait(100)
 
     print("LR")
-    for i in range(500):
+    for i in range(1000):
         if sensorColorLeft.color() == 2 and sensorColorRight.color() == 2:
             contGreen += 1
         else:
             contGreen += 0
 
-    print("LR")
-    for i in range(500):
-        if sensorColorLeft.color() == 2 and sensorColorRight.color() == 2:
-            contGreen += 1
-        else:
-            contGreen += 0
-    
     if contGreen >= 999:
         brick.sound.beep()
         print("Green")
@@ -199,7 +178,6 @@ def followTrack():
                 wait(100)
                 brick.display.clear() 
             contGreen = 0
-
         else: # side left
             motorMovementTurn.drive(0,-128)
             while sensorColorLeft.reflection() > 30:
@@ -231,7 +209,6 @@ def followTrack():
                 doubleGreen()
             else:
                 motorMovementForward.drive(20,0)
-
         else:
             brick.display.text("Black", (60, 50))
             motorMovementForward.drive(20,0)
