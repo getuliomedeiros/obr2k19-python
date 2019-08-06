@@ -45,8 +45,6 @@ def detectGreenRight():
     for i in range(1000):
         if sensorColorRight.color() == 2:
             contGreen += 1
-        else:
-            contGreen += 0
 
     if contGreen >= 999:
         brick.sound.beep()
@@ -76,8 +74,6 @@ def detectGreenLeft():
     for i in range(1000):
         if sensorColorLeft.color() == 2:
             contGreen += 1
-        else:
-            contGreen += 0
 
     if contGreen >= 999:
         brick.sound.beep()
@@ -106,8 +102,6 @@ def doubleGreen():
     for i in range(1000):
         if sensorColorLeft.color() == 2 and sensorColorRight.color() == 2:
             contGreen += 1
-        else:
-            contGreen += 0
 
     if contGreen >= 999:
         brick.sound.beep()
