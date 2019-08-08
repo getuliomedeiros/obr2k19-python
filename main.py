@@ -25,7 +25,7 @@ motorDirectionRight = Motor(Port.D)
 # Sensor declaration ----------------------------------------------------------------------
 sensorColorLeft = ColorSensor(Port.S1)
 sensorUltrassonicFront = UltrasonicSensor(Port.S2)
-#sensorUltrassonicSide = UltrasonicSensor(Port.S3)
+sensorUltrassonicSide = UltrasonicSensor(Port.S3)
 sensorColorRight = ColorSensor(Port.S4)
 
 #Movements --------------------------------------------------------------------------------
@@ -234,8 +234,19 @@ def deflectObstacle():
     while sensorColorLeft.reflection() > 30:
         wait(10)
 
-# Function rescue init --------------------------------------------------------------------
-#def rescueInit():
+# Function deflect Ramp -------------------------------------------------------------------
+def deflectRamp():
+    brick.display.text("deflectRamp", (60, 50))
+    motorMovementForward.drive(0,0) # stop
+    wait(3000) # delay stop
+    if sensorUltrassonicSide.distance() < 70:
+        motorMovementForward.drive(70,0) # front
+        wait(3000) # delay
+        if sensorUltrassonicSide.distance() < 70:
+            while sensorUltrassonicSide.distance() < 70:
+                followTrack()
+                motorMovementForward.drive(70,0) # front
+                wait(1000) # delay
 
 # Function rescue -------------------------------------------------------------------------
 #def rescue():
@@ -245,6 +256,8 @@ def main():
     while True:
         if sensorUltrassonicFront.distance() < 100:
             deflectObstacle()
+        elif sensorUltrassonicSide.distance() < 100:
+            deflectRamp()
         else:
             followTrack()
 
